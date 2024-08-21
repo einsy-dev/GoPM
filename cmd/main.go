@@ -20,7 +20,10 @@ func main() {
 			Aliases: []string{"i"},
 			Usage:   "install package",
 			Action: func(c *cli.Context) error {
-				goGet(c.Args().Get(0))
+				if c.Args().Get(0) == "" {
+					log.Fatal("package name is required")
+				}
+				goGet(c.Args())
 				return nil
 			},
 		},
@@ -29,46 +32,42 @@ func main() {
 			Aliases: []string{"r"},
 			Usage:   "remove package",
 			Action: func(c *cli.Context) error {
-				goDel(c.Args().Get(0))
+				goDel()
 				return nil
 			},
 		},
 	}
-	app.Action = func(c *cli.Context) error {
-		println("Greetings")
-		return nil
-	}
 	app.Run(os.Args)
 }
 
-func goGet(name string) *exec.Cmd {
-	if goList(name) {
-		log.Fatal(data.Data[name] + " package is already installed")
-	}
-	if _, ok := data.Data[name]; ok {
-		cmd := exec.Command("go", "get", data.Data[name])
-		output, err := cmd.CombinedOutput()
-		if err != nil {
-			log.Fatal(err)
+func goGet(name []string) *exec.Cmd {
+	for _, v := range name {
+		if goList(v) {
+			fmt.Println(data.Data[v] + " package is already installed")
+			continue
 		}
-		fmt.Println(string(output))
+		if _, ok := data.Data[v]; ok {
+			cmd := exec.Command("go", "get", data.Data[v])
+			output, err := cmd.CombinedOutput()
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println(string(output))
+		}
 	}
 	return nil
 }
 
-func goDel(name string) *exec.Cmd {
-	if !goList(name) {
-		log.Fatal(data.Data[name] + " package is not installed")
+func goDel() *exec.Cmd {
+
+	cmd := exec.Command("go", "mod", "tidy")
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		log.Fatal(err)
 	}
-	if _, ok := data.Data[name]; ok {
-		cmd := exec.Command("go", "mod", "tidy")
-		output, err := cmd.CombinedOutput()
-		if err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(string(output))
-		fmt.Println(data.Data[name] + " is removed")
-	}
+	fmt.Println(string(output))
+	fmt.Println("Unused dependencies is removed")
+
 	return nil
 }
 
