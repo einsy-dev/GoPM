@@ -47,7 +47,7 @@ func goGet(name []string) *exec.Cmd {
 			continue
 		}
 		if _, ok := data.Data[v]; ok {
-			cmd := exec.Command("go", "get", data.Data[v])
+			cmd := exec.Command("go", "get", "-u", "-v", data.Data[v])
 			output, err := cmd.CombinedOutput()
 			if err != nil {
 				log.Fatal(err)
