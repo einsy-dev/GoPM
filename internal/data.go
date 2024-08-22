@@ -24,7 +24,11 @@ var Data = map[string]string{
 	"kallax": "gopkg.in/src-d/go-kallax.v1/...",
 	"reform": "gopkg.in/reform.v1/...",
 	// Others
-	"godotenv": "github.com/joho/godotenv",
-	"cli":      "github.com/urfave/cli",
-	"mockgen":  "github.com/golang/mock/mockgen",
+	"swag":     "github.com/swaggo/swag/cmd/swag",        // api documentation
+	"godotenv": "github.com/joho/godotenv",               // env variables
+	"cli":      "github.com/urfave/cli",                  // cli tool
+	"mockgen":  "github.com/golang/mock/mockgen",         // mock generator
+	"ebiten":   "github.com/hajimehoshi/ebiten/v2",       // game engine
+	"wails":    "github.com/wailsapp/wails/v2/cmd/wails", // app builder
+	"gogio":    "gioui.org/cmd/gogio",                    // app builder
 }

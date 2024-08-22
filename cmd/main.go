@@ -28,11 +28,22 @@ func main() {
 			},
 		},
 		{
-			Name:    "remove",
-			Aliases: []string{"r"},
-			Usage:   "remove package",
+			Name:    "clean",
+			Aliases: []string{"c"},
+			Usage:   "remove unused packages",
 			Action: func(c *cli.Context) error {
 				goDel()
+				return nil
+			},
+		},
+		{
+			Name:    "list",
+			Aliases: []string{"l"},
+			Usage:   "list package",
+			Action: func(c *cli.Context) error {
+				for i, v := range data.Data {
+					fmt.Println(i, " ", v)
+				}
 				return nil
 			},
 		},
