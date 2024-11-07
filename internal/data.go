@@ -31,4 +31,5 @@ var Data = map[string]string{
 	"ebiten":   "github.com/hajimehoshi/ebiten/v2",       // game engine
 	"wails":    "github.com/wailsapp/wails/v2/cmd/wails", // app builder
 	"gogio":    "gioui.org/cmd/gogio",                    // app builder
+	"screen":   "github.com/inancgumus/screen",           // terminal ui
 }
