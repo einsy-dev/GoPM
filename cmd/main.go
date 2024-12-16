@@ -8,7 +8,7 @@ import (
 
 	"github.com/urfave/cli"
 
-	data "app/internal"
+	data "github.com/einsy-dev/GoPM/internal"
 )
 
 func main() {
