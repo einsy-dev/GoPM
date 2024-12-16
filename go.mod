@@ -1,4 +1,4 @@
-module app
+module github.com/einsy-dev/GoPM
 
 go 1.22.6
 
